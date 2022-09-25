@@ -1,6 +1,5 @@
 # Green House IOT
 ## Documentation for greenhouse ecosystem using Nodemcu and Arduino
-<br></br>
 
 <div align="center">
   <img width="350" height="350" src="https://raw.githubusercontent.com/FajarTheGGman/greenhouse/591704629d967331c990c03d8db59274f405523c/images/banner.svg"/>
