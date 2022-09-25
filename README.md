@@ -97,6 +97,7 @@ const char index_html[] PROGMEM = R"rawliteral(
 <!DOCTYPE HTML><html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     html {
      font-family: Arial;
@@ -186,6 +187,7 @@ const char monitoring_html[] PROGMEM = R"rawliteral(
 <!DOCTYPE HTML><html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     html {
      font-family: Arial;
@@ -240,11 +242,14 @@ const char monitoring_html[] PROGMEM = R"rawliteral(
      </center>
     <h2>Kosgoro Green House</h2>
     <p>
+
       <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thermometer"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg>
       <span class="dht-labels">Temperatur </span> 
       <span id="temperature">%TEMPERATURE%    <sup class="units">&deg;C</sup></span>
     </p>
     <p>
+
+
       <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>
       <span class="dht-labels">Kelembapan Tanah</span>
       <span id="humidity">%HUMIDITY%    <sup class="units">%</sup></span>
@@ -263,6 +268,7 @@ setInterval(function ( ) {
   xhttp.open("GET", "/temperature", true);
   xhttp.send();
 }, 10000 ) ;
+
 setInterval(function ( ) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -282,6 +288,7 @@ const char not_found[] PROGMEM = R"rawliteral(
 <!DOCTYPE HTML><html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     html {
      font-family: Arial;
@@ -412,10 +419,12 @@ if(WiFi.softAP(ssid, pass)){
 server.on("/", [](){
   server.send(200, "text/plain", "{ Server: greenhouse }");
 });
+
 server.on("/temperatur", temp_sensor);
 server.on("/lampu/on", lampu_on);
 server.on("/lampu/off", lampu_off);
 server.on("/kelembapan", kelembapan);
+
 */
 
 server.begin();
@@ -451,6 +460,18 @@ void loop(){
       Serial.println(humidity_value);
     }
   }
+  
+  if(Serial.available()){
+     int get_sensor = Serial.read();
+     int limit = 300; 
+     if(get_sensor < limit){
+       digitalWrite(pipe, LOW);
+     }else{
+       digitalWrite(pipe, HIGH);
+     }
+  }else{
+     request->send_P(200, "text/plain", "{ Error: Error konek ke arduino, cek lagi wiring nya! }");
+   }
 }
 ```
 
