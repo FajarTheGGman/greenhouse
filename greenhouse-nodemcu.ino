@@ -416,6 +416,6 @@ void loop(){
        digitalWrite(pipe, HIGH);
      }
   }else{
-     request->send_P(200, "text/plain", "{ Error: Error konek ke arduino, cek lagi wiring nya! }");
+     Serial.println("{ Error: Error konek ke arduino, cek lagi wiring nya! }");
    }
 }
