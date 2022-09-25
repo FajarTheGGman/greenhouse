@@ -406,4 +406,16 @@ void loop(){
       Serial.println(humidity_value);
     }
   }
+  
+  if(Serial.available()){
+     int get_sensor = Serial.read();
+     int limit = 300; 
+     if(get_sensor < limit){
+       digitalWrite(pipe, LOW);
+     }else{
+       digitalWrite(pipe, HIGH);
+     }
+  }else{
+     request->send_P(200, "text/plain", "{ Error: Error konek ke arduino, cek lagi wiring nya! }");
+   }
 }
