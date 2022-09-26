@@ -484,7 +484,7 @@ void loop(){
 
 void setup(){
 Serial.begin(115200);
-pinMode(sensor);
+pinMode(sensor, INPUT);
 
 Serial.println("[---------------------]");
 Serial.println("[ Mesin : Arduino ]");
