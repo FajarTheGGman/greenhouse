@@ -23,8 +23,8 @@ float humidity_value = 0.0;
 unsigned long interval = 10000;
 unsigned long previousMillis = 0;
 
-char* ssid = "GreenHouse";
-char* pass = "greenhousekgr";
+char* ssid = "Smart Lab";
+char* pass = "specimenroom";
 
 String processor(const String& var){
   //Serial.println(var);
@@ -311,7 +311,7 @@ Serial.println("[ Sensor : DHT11 ]");
 Serial.println("[ Sensor : Relay ]");
 Serial.println("[-------------------------------]");
 
-if(WiFi.softAP(ssid, pass)){
+if(WiFi.begin(ssid, pass)){
   Serial.println("[+] Successfully created connection");
   Serial.print("[-] IP : ");
   Serial.println(WiFi.localIP());
